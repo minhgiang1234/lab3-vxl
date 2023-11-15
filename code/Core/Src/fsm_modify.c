@@ -8,6 +8,9 @@
 
 #include "fsm_modify.h"
 
+uint8_t num_in_bit[10] = {0x40, 0x79, 0x24, 0x30, 0x19, 0x12, 0x02, 0x78, 0x00, 0x10};
+int chuc = 0;
+int donvi = 0;
 void fsm_modify_run(){
 	switch (status){
 		case MOD_RED:
@@ -24,16 +27,32 @@ void fsm_modify_run(){
 
 			seg_buffer[0] = 0x40;
 			seg_buffer[1] = 0x24;
-			seg_buffer[2] = 0x40;
-			seg_buffer[3] = 0x40;
+			seg_buffer[2] = num_in_bit[chuc];
+			seg_buffer[3] = num_in_bit[donvi];
 
-			if (isButton1Pressed()){
-				status = MOD_YELLOW;
+			if (isButton2Pressed()){
+				donvi ++;
+				if (donvi > 9) {
+					chuc++;
+					donvi = 0;
+				}
+
+				if (chuc > 9){
+					chuc = 0;
+				}
 			}
 
 			if (isButton3Pressed()){
-
+				red_duration = chuc * 10 + donvi;
 			}
+
+			if (isButton1Pressed()){
+				donvi = 0;
+				chuc = 0;
+				status = MOD_YELLOW;
+			}
+
+
 			break;
 
 		case MOD_YELLOW:
@@ -51,10 +70,28 @@ void fsm_modify_run(){
 
 			seg_buffer[0] = 0x40;
 			seg_buffer[1] = 0x30;
-			seg_buffer[2] = 0x40;
-			seg_buffer[3] = 0x40;
+			seg_buffer[2] = num_in_bit[chuc];
+			seg_buffer[3] = num_in_bit[donvi];
+
+			if (isButton2Pressed()){
+				donvi ++;
+				if (donvi > 9) {
+					chuc++;
+					donvi = 0;
+				}
+
+				if (chuc > 9){
+					chuc = 0;
+				}
+			}
+
+			if (isButton3Pressed()){
+				yellow_duration = chuc * 10 + donvi;
+			}
 
 			if (isButton1Pressed()){
+				donvi = 0;
+				chuc = 0;
 				status = MOD_GREEN;
 			}
 
@@ -74,10 +111,29 @@ void fsm_modify_run(){
 
 			seg_buffer[0] = 0x40;
 			seg_buffer[1] = 0x19;
-			seg_buffer[2] = 0x40;
-			seg_buffer[3] = 0x40;
+			seg_buffer[2] = num_in_bit[chuc];
+			seg_buffer[3] = num_in_bit[donvi];
+
+			if (isButton2Pressed()){
+				donvi ++;
+				if (donvi > 9) {
+					chuc++;
+					donvi = 0;
+				}
+
+				if (chuc > 9){
+					chuc = 0;
+				}
+			}
+
+			if (isButton3Pressed()){
+				green_duration = chuc * 10 + donvi;
+			}
+
 
 			if (isButton1Pressed()){
+				donvi = 0;
+				chuc = 0;
 				status = RED_GREEN;
 			}
 	}

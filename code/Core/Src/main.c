@@ -105,6 +105,10 @@ int main(void)
   setTimerLed(500);
   setTimerSeg(100);
   status = MOD_RED;
+
+  red_duration = 5;
+  yellow_duration = 2;
+  green_duration = 3;
   /* USER CODE END 2 */
 
   /* Infinite loop */
