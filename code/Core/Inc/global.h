@@ -21,14 +21,15 @@
 #define MOD_YELLOW 12
 #define MOD_GREEN 13
 
-#define MODIFY_MODE
-#define NORMAL_MODE
+#define MODIFY_MODE 21
+#define NORMAL_MODE 22
 
 extern int status;
 extern uint8_t seg_buffer[4];
 extern int red_duration;
 extern int yellow_duration;
 extern int green_duration;
+extern int fsm_status;
 
 
 

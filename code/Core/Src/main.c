@@ -26,6 +26,7 @@
 #include <stdint.h>
 #include "global.h"
 #include "fsm_modify.h"
+#include "fsm_normal.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -101,14 +102,17 @@ int main(void)
   MX_TIM2_Init();
   HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE BEGIN 2 */
-  setTimer1(1000);
-  setTimerLed(500);
-  setTimerSeg(100);
-  status = MOD_RED;
 
+
+  fsm_status= NORMAL_MODE;
+  status = RED_GREEN;
   red_duration = 5;
   yellow_duration = 2;
   green_duration = 3;
+
+  setTimer1(green_duration * 1000);
+  setTimerLed(500);
+  setTimerSeg(100);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,7 +120,22 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  fsm_modify_run();
+	  switch (fsm_status){
+	  	  case NORMAL_MODE:
+	  		  fsm_normal_run();
+	  		  if (isButton1Pressed()){
+	  			  fsm_status = MODIFY_MODE;
+	  			  status = MOD_RED;
+	  		  }
+	  		  break;
+
+	  	  case MODIFY_MODE:
+	  		 fsm_modify_run();
+
+	  }
+
+
+
 	  if (timer_seg_flag == 1){
 		  setTimerSeg(100);
 		  display7Seg(seg_index++);

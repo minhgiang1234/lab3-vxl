@@ -132,6 +132,7 @@ void fsm_modify_run(){
 				donvi = 0;
 				chuc = 0;
 				status = RED_GREEN;
+				fsm_status = NORMAL_MODE;
 			}
 	}
 }
