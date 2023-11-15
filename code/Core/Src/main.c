@@ -19,6 +19,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "button1.h"
+#include "button2.h"
+#include "button3.h"
+#include "software_timer.h"
+#include <stdint.h>
+#include "global.h"
+#include "fsm_modify.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -50,12 +57,16 @@ TIM_HandleTypeDef htim2;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM2_Init(void);
+void display7Seg(int index);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+uint8_t seg_buffer[4] = {0};
+int seg_index = 0;
 
 /* USER CODE END 0 */
 
@@ -88,8 +99,12 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM2_Init();
+  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE BEGIN 2 */
-
+  setTimer1(1000);
+  setTimerLed(500);
+  setTimerSeg(100);
+  status = MOD_RED;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -97,7 +112,12 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  fsm_modify_run();
+	  if (timer_seg_flag == 1){
+		  setTimerSeg(100);
+		  display7Seg(seg_index++);
+		  if(seg_index > 3) seg_index = 0;
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -234,7 +254,48 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	getKey1Input();
+	getKey2Input();
+	getKey3Input();
+	timer1Run();
+	timerLedRun();
+	timerSegRun();
 
+}
+
+void display7Seg(int index){
+	if (index == 0) {
+		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_SET);
+	};
+
+	if (index == 1) {
+		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_SET);
+	};
+
+	if (index == 2) {
+		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_SET);
+	};
+
+	if (index == 3) {
+		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_RESET);
+	};
+
+	GPIOB->ODR = seg_buffer[index];
+}
 /* USER CODE END 4 */
 
 /**

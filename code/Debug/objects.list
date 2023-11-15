@@ -1,6 +1,7 @@
 "./Core/Src/button1.o"
 "./Core/Src/button2.o"
 "./Core/Src/button3.o"
+"./Core/Src/fsm_modify.o"
 "./Core/Src/global.o"
 "./Core/Src/main.o"
 "./Core/Src/software_timer.o"
