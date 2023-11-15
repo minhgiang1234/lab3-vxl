@@ -37,7 +37,7 @@ void getKey3Input(){
 				TimerForKeyPress3 = 200;
 
 			}
-		}else {
+		}else { // nhấn giữ
 			TimerForKeyPress3 --;
 			if (TimerForKeyPress3 == 0){
 				if (Key3Reg2 == PRESSED_STATE){
