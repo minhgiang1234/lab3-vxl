@@ -199,8 +199,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, RE1_Pin|YE1_Pin|GR1_Pin|RE2_Pin
                           |YE2_Pin|GR2_Pin|EN0_Pin|EN1_Pin
-                          |EN2_Pin|EN3_Pin|BU1_Pin|BU2_Pin
-                          |BU3_Pin, GPIO_PIN_RESET);
+                          |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
@@ -208,12 +207,10 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : RE1_Pin YE1_Pin GR1_Pin RE2_Pin
                            YE2_Pin GR2_Pin EN0_Pin EN1_Pin
-                           EN2_Pin EN3_Pin BU1_Pin BU2_Pin
-                           BU3_Pin */
+                           EN2_Pin EN3_Pin */
   GPIO_InitStruct.Pin = RE1_Pin|YE1_Pin|GR1_Pin|RE2_Pin
                           |YE2_Pin|GR2_Pin|EN0_Pin|EN1_Pin
-                          |EN2_Pin|EN3_Pin|BU1_Pin|BU2_Pin
-                          |BU3_Pin;
+                          |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -227,6 +224,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : BU1_Pin BU2_Pin BU3_Pin */
+  GPIO_InitStruct.Pin = BU1_Pin|BU2_Pin|BU3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
 
