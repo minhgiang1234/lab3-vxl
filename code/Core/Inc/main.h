@@ -58,6 +58,46 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define RE1_Pin GPIO_PIN_1
+#define RE1_GPIO_Port GPIOA
+#define YE1_Pin GPIO_PIN_2
+#define YE1_GPIO_Port GPIOA
+#define GR1_Pin GPIO_PIN_3
+#define GR1_GPIO_Port GPIOA
+#define RE2_Pin GPIO_PIN_4
+#define RE2_GPIO_Port GPIOA
+#define YE2_Pin GPIO_PIN_5
+#define YE2_GPIO_Port GPIOA
+#define GR2_Pin GPIO_PIN_6
+#define GR2_GPIO_Port GPIOA
+#define EN0_Pin GPIO_PIN_7
+#define EN0_GPIO_Port GPIOA
+#define SEG0_Pin GPIO_PIN_0
+#define SEG0_GPIO_Port GPIOB
+#define SEG1_Pin GPIO_PIN_1
+#define SEG1_GPIO_Port GPIOB
+#define SEG2_Pin GPIO_PIN_2
+#define SEG2_GPIO_Port GPIOB
+#define EN1_Pin GPIO_PIN_8
+#define EN1_GPIO_Port GPIOA
+#define EN2_Pin GPIO_PIN_9
+#define EN2_GPIO_Port GPIOA
+#define EN3_Pin GPIO_PIN_10
+#define EN3_GPIO_Port GPIOA
+#define BU1_Pin GPIO_PIN_11
+#define BU1_GPIO_Port GPIOA
+#define BU2_Pin GPIO_PIN_12
+#define BU2_GPIO_Port GPIOA
+#define BU3_Pin GPIO_PIN_13
+#define BU3_GPIO_Port GPIOA
+#define SEG3_Pin GPIO_PIN_3
+#define SEG3_GPIO_Port GPIOB
+#define SEG4_Pin GPIO_PIN_4
+#define SEG4_GPIO_Port GPIOB
+#define SEG5_Pin GPIO_PIN_5
+#define SEG5_GPIO_Port GPIOB
+#define SEG6_Pin GPIO_PIN_6
+#define SEG6_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
