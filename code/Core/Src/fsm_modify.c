@@ -128,7 +128,6 @@ void fsm_modify_run(){
 				green_duration = chuc * 10 + donvi;
 			}
 
-
 			if (isButton1Pressed()){
 				donvi = 0;
 				chuc = 0;
