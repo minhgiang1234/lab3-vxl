@@ -1,0 +1,2 @@
+button3.c:19:5:isButton3Pressed	4	static
+button3.c:27:6:getKey3Input	8	static

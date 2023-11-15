@@ -228,7 +228,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : BU1_Pin BU2_Pin BU3_Pin */
   GPIO_InitStruct.Pin = BU1_Pin|BU2_Pin|BU3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }

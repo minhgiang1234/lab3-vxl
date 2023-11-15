@@ -1,0 +1,2 @@
+button2.c:19:5:isButton2Pressed	4	static
+button2.c:27:6:getKey2Input	8	static
